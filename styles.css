@@ -2,6 +2,7 @@ body {
     /* background: linear-gradient(to right, rgb(139, 139, 192), rgb(106, 151, 106)); */
     background-color:rgb(54, 36, 75);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 170px;
@@ -23,6 +24,7 @@ body {
    transform: translate(-50%, -50%);
    border-radius: 50%;   
 }
+
 
 
 .top {
@@ -93,4 +95,8 @@ body {
     background-color: rgb(95, 204, 255);
     box-shadow: 0 5px #666;
     transform: translateY(4px);
+  }
+
+  button {
+      margin-top: 50px;;
   }
