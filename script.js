@@ -16,6 +16,8 @@ blueButton.style.backgroundColor = "rgb(75, 75, 243)"
 // state of green button
 var greenStatus = true
 var gameCounter = 0
+var score = -10
+var scoreMessage = document.getElementById("score")
 
 // All arrays
 var randomColorsArray = []
@@ -41,6 +43,7 @@ function getGreen() {
         continueGame()
         flashRandomColorsArray(randomColorsArray, 0)
         inputColorsArray = []
+        scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
         }
     }
     console.log(randomColorsArray)
@@ -54,6 +57,7 @@ function getRed() {
             continueGame()
             flashRandomColorsArray(randomColorsArray, 0)
             inputColorsArray = []
+            scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
         }
         console.log(randomColorsArray)
         console.log(inputColorsArray)
@@ -66,6 +70,7 @@ function getYellow() {
             continueGame()
             flashRandomColorsArray(randomColorsArray, 0)
             inputColorsArray = []
+            scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
         }
         console.log(randomColorsArray)
         console.log(inputColorsArray)
@@ -78,6 +83,7 @@ function getBlue() {
         continueGame()
         flashRandomColorsArray(randomColorsArray, 0)
         inputColorsArray = []
+        scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
     }
     console.log(randomColorsArray)
     console.log(inputColorsArray)
@@ -97,6 +103,9 @@ function startGame() {
     greenStatus = false
     continueGame()
     flashRandomColorsArray(randomColorsArray, 0)
+    document.getElementById("startMessage").innerHTML = ``
+    score = 0
+    scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
 }
 
 
@@ -113,7 +122,9 @@ function gameOver() {
     setColorGreen()
     }, 2000)
     greenFlash = setInterval(setColorGreen, 500)
-
+    document.getElementById("startMessage").innerHTML = `<div id="startMessage" class="counter">Click on green to start</div>`
+    score = 0
+    // scoreMessage.innerHTML = `<div id="score">Score ${score}:  </div>`
 }
 
 
@@ -136,11 +147,7 @@ function continueGame() {
     }
 
     randomColorsArray.push(color)
-    //flashRandomColorsArray(randomColorsArray, 0)
-
-    // need to clear inputColorsArray to test memory from beginning
-    // if (inputColorsArray.length == randomColorsArray.length)
-    // inputColorsArray = []
+    score += 10
 }
 
 // function to flash the randomColorsArray 
@@ -165,7 +172,7 @@ function timedFlashes(array, i) {
         if (i<array.length) {
             timedFlashes(array, i)
         }
-    }, 1000)
+    }, 800)
 }
  // call this function to flash current random colors
 function flashRandomColorsArray(array, i) {

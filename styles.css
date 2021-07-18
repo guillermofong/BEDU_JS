@@ -1,6 +1,7 @@
 body {
     /* background: linear-gradient(to right, rgb(139, 139, 192), rgb(106, 151, 106)); */
     background-color:rgb(54, 36, 75);
+    /* background-color:rgb(61, 20, 109); */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,11 +12,15 @@ body {
 .counter{
     width: 100%;
     height: 100px;
+    color: white;
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 0;
 }
 
 .container{
     position: relative;
-}
+    }
 
 .container::after {
     content: '';
@@ -102,6 +107,8 @@ body {
     transform: translateY(4px);
   }
 
-  button {
-      margin-top: 50px;;
-  }
+#score {
+    margin-top: 30px;
+    font-size: 25px;
+    color: white;
+}
