@@ -112,3 +112,12 @@ body {
     font-size: 25px;
     color: white;
 }
+
+footer {
+    width: 90%;
+    text-align: right;
+}
+
+footer > a{
+    color: white;
+}
