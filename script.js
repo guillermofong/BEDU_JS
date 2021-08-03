@@ -122,7 +122,7 @@ function gameOver() {
     setColorGreen()
     }, 2000)
     greenFlash = setInterval(setColorGreen, 500)
-    document.getElementById("startMessage").innerHTML = `<div id="startMessage" class="counter">Click on green to start</div>`
+    document.getElementById("startMessage").innerHTML = `<div id="startMessage" class="counter">Game Over! Click on green to start</div>`
     score = 0
     // scoreMessage.innerHTML = `<div id="score">Score ${score}:  </div>`
 }
