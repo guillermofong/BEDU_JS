@@ -217,7 +217,7 @@ function darkBlue() {
 
 
 // functions to light up buttons during play
-async function flashGreenOnce() {
+function flashGreenOnce() {
     setTimeout(function(){
         lightGreen()
         gameCounter++}, 500)
@@ -226,7 +226,7 @@ async function flashGreenOnce() {
     },1000)
 }
 
-async function flashRedOnce() {
+function flashRedOnce() {
     setTimeout(function(){
         lightRed()
         gameCounter++}, 500)
@@ -235,7 +235,7 @@ async function flashRedOnce() {
     }, 1000)
 }
 
-async function flashYellowOnce() {
+function flashYellowOnce() {
     setTimeout(function(){
         lightYellow()
         gameCounter++}, 500)
@@ -244,7 +244,7 @@ async function flashYellowOnce() {
     }, 1000)
 }
 
-async function flashBlueOnce() {
+function flashBlueOnce() {
     setTimeout(function(){
         lightBlue()
         gameCounter++}, 500)
