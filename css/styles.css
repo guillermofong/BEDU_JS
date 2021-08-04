@@ -1,12 +1,9 @@
 body {
-    /* background: linear-gradient(to right, rgb(139, 139, 192), rgb(106, 151, 106)); */
     background-color:rgb(54, 36, 75);
-    /* background-color:rgb(61, 20, 109); */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* margin-top: 70px; */
 }
 
 .counter{
@@ -14,7 +11,7 @@ body {
     height: 100px;
     color: white;
     font-size: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 0;
 }
 
@@ -40,17 +37,11 @@ body {
 .top {
     display: flex;
 
-    /* height: 250px;
-    width: 500px;
-    justify-content: space-between; */
-
 }
 
 .bottom {
     display: flex;
 
-    /* height: 250px;
-    width: 500px; */
 }
 
 
@@ -111,6 +102,28 @@ body {
     margin-top: 30px;
     font-size: 25px;
     color: white;
+}
+
+#speaker-on {
+    background-color: none;
+    border-radius: 50%;
+}
+
+#speaker-on:active {
+    background-color: white;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+
+#speaker-off {
+    background-color: none;
+    border-radius: 50%;
+}
+
+#speaker-off:active {
+    background-color: white;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 footer {

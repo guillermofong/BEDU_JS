@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='styles.css'>
+    <link rel='stylesheet' href='css/styles.css'>
     <script src="script.js"></script>
     <title>Document</title>
 </head>
@@ -12,9 +12,13 @@
     <header>
         <div id="startMessage" class="counter">Click on green to start <a href="https://www.youtube.com/watch?v=1Yqj76Q4jJ4" target="_blank" style="color: rgb(72, 235, 77);">Instructions</a></div>
     </header>
+    <div style="position:fixed;">
+        <img src="speaker_on.svg" style="width: 7%;" id="speaker-on" onclick="soundOn()">
+        <img src="speaker_off.svg" style="width: 7%;" id="speaker-off" onclick="soundOff()">
+    </div>
     <div id="center" class="container">
     
-        <div class="top">
+        <div class="top" >
             <div id="green" onclick="getGreen()" ></div>
             <div id="red" onclick="getRed()"></div>
         </div>
@@ -24,9 +28,13 @@
         </div>
     </div>
 
+    <audio id="beepGreen" src="beep-22.mp3"></audio>
+    <audio id="beepRed" src="beep-23.mp3"></audio>
+    <audio id="beepYellow" src="beep-28.mp3"></audio>
+    <audio id="beepBlue" src="beep-29.mp3"></audio>
+    <audio id="beepError" src="beep-error.mp3"></audio>
     <div id="score"></div>
     <div id="max_score"></div>
-    <footer><a href="https://github.com/guillermofong/BEDU_JS">Code</a></footer>
 </body>
     <script src="script.js"></script>
 </html>

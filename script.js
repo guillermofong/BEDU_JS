@@ -9,7 +9,16 @@ var score = null
 var greenStatus = true // true when waiting for player to start
 var randomColorsArray = [] // stores random generated colors
 var inputColorsArray = [] // stores colors clicked by user
+var speakerOn = document.getElementById("speaker-on")
+var speakerOff = document.getElementById("speaker-off")
+var beepGreen = document.getElementById("beepGreen");
+var beepRed = document.getElementById("beepRed");
+var beepYellow = document.getElementById("beepYellow");
+var beepBlue = document.getElementById("beepBlue");
+var beepError = document.getElementById("beepError")
+var beepSound = true
 
+speakerOn.style.backgroundColor =""
 
 // Set default color of buttons via JS (avoids certains bugs cashes if relying only on css)
 greenButton.style.backgroundColor = "rgb(4, 170, 109)"
@@ -22,7 +31,6 @@ function startGame() {
     greenStatus = false
     continueGame()
     flashRandomColorsArray(randomColorsArray, 0)
-    //document.getElementById("startMessage").textContent = "Correctly repeat a longer and longer sequence of signals."
     document.getElementById("startMessage").innerHTML = `<div id="startMessage" class="counter">Correctly repeat a longer and longer sequence of signals <a href="https://www.youtube.com/watch?v=1Yqj76Q4jJ4" target="_blank" style="color: rgb(250, 127, 152);">Instructions</a></div>`
     score = 0
     scoreMessage.textContent = "score: " + score
@@ -42,7 +50,35 @@ function gameOver() {
     }, 2000)
     greenFlash = setInterval(setColorGreen, 500)
     document.getElementById("startMessage").innerHTML =`<div id="startMessage" class="counter">Game Over! Click green to start <a href="https://www.youtube.com/watch?v=1Yqj76Q4jJ4" target="_blank" style="color: rgb(250, 127, 152);">Instructions</a></div>`
+    if (beepSound) beepError.play()
     score = 0
+}
+
+
+//Sound controls
+if (beepSound) {
+    speakerOn.style.backgroundColor = "orange"
+    speakerOff.style.backgroundColor = ""
+}
+else {
+    speakerOn.style.backgroundColor = ""
+    speakerOff.style.backgroundColor = "orange"
+}
+
+
+
+function soundOn() {
+    beepSound = true
+    speakerOn.style.backgroundColor = "orange"
+    speakerOff.style.backgroundColor = ""
+    return beepSound
+}
+
+function soundOff() {
+    beepSound = false
+    speakerOn.style.backgroundColor = ""
+    speakerOff.style.backgroundColor = "orange"
+    return beepSound
 }
 
 
@@ -55,28 +91,33 @@ function getGreen() {
     }
     else {
     clickEventHandler("green")
+    flashGreenOnce()
     }
 }
 
 function getRed() {
-        clickEventHandler("red")
+    clickEventHandler("red")
+    flashRedOnce()
 }
 
 function getYellow() {
-        clickEventHandler("yellow")
+    clickEventHandler("yellow")
+    flashYellowOnce()
 }
 
 function getBlue() {
     clickEventHandler("blue")
+    flashBlueOnce()
 }
 
 // Stores user input clicks on the array 'inputColorsArray' and compares this array with 'randomColorsArray'
-function clickEventHandler(color) {
+function clickEventHandler(color, beepColor) {
     inputColorsArray.push(color)
     if (checkBothArrays(randomColorsArray, inputColorsArray) == false) gameOver()
     else if (checkBothArrays(randomColorsArray, inputColorsArray) && inputColorsArray.length==randomColorsArray.length){
         continueGame()
-        flashRandomColorsArray(randomColorsArray, 0)
+        setTimeout(function() {flashRandomColorsArray(randomColorsArray, 0)}, 1000)
+        // flashRandomColorsArray(randomColorsArray, 0)
         inputColorsArray = []
         scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
     }
@@ -172,29 +213,30 @@ function darkBlue() {
 
 // functions to light up buttons during play
 function flashGreenOnce() {
-    flashColorOnce(lightGreen,darkGreen)
+    flashColorOnce(lightGreen,darkGreen,beepGreen)
 }
 
 function flashRedOnce() {
-    flashColorOnce(lightRed,darkRed)
+    flashColorOnce(lightRed,darkRed,beepRed)
 }
 
 function flashYellowOnce() {
-    flashColorOnce(lightYellow,darkYellow)
+    flashColorOnce(lightYellow,darkYellow,beepYellow)
 }
 
 function flashBlueOnce() {
-    flashColorOnce(lightBlue,darkBlue)
+    flashColorOnce(lightBlue,darkBlue,beepBlue)
 }
 
 // helper function for flashGreenOnce(), flashRedOnce(), flashBlueOnce(), flashYellowOnce()
-function flashColorOnce(lightColorFunction, darkColorFunction) {
+function flashColorOnce(lightColorFunction, darkColorFunction, beepColor) {
     setTimeout(function(){
         lightColorFunction()
-        gameCounter++}, 500)
+        if (beepSound) beepColor.play()
+        }, 0) //500
     setTimeout(function(){
         darkColorFunction()
-    },1000)
+    },500) //1000
 }
 
 
