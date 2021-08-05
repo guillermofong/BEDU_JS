@@ -17,23 +17,26 @@ var beepYellow = document.getElementById("beepYellow");
 var beepBlue = document.getElementById("beepBlue");
 var beepError = document.getElementById("beepError")
 var beepSound = true
+var flashTimeSpeed = 800
+var flashColorOnceSpeed = 500
 
-speakerOn.style.backgroundColor =""
 
 // Set default color of buttons via JS (avoids certains bugs cashes if relying only on css)
-greenButton.style.backgroundColor = "rgb(4, 170, 109)"
-redButton.style.backgroundColor = "rgb(220, 20, 60)"
-yellowButton.style.backgroundColor = "rgb(243, 243, 114)"
-blueButton.style.backgroundColor = "rgb(75, 75, 243)"
+darkGreen()
+darkRed()
+darkYellow()
+darkBlue()
 
 
 function startGame() {
     greenStatus = false
     continueGame()
-    flashRandomColorsArray(randomColorsArray, 0)
+
+    setTimeout(function() {flashRandomColorsArray(randomColorsArray, 0, flashTimeSpeed)}, 800)
     document.getElementById("startMessage").innerHTML = `<div id="startMessage" class="counter">Correctly repeat a longer and longer sequence of signals <a href="https://www.youtube.com/watch?v=1Yqj76Q4jJ4" target="_blank" style="color: rgb(250, 127, 152);">Instructions</a></div>`
     score = 0
     scoreMessage.textContent = "score: " + score
+    darkGreen()
 }
 
 
@@ -41,14 +44,12 @@ function gameOver() {
     greenStatus = true
     randomColorsArray = []
     inputColorsArray = []
-    lightGreen()
+    flashTimeSpeed = 800
+    flashColorOnceSpeed = 500
     lightRed()
     lightYellow()
     lightBlue()
-    setTimeout(function() {
-    setColorGreen()
-    }, 2000)
-    greenFlash = setInterval(setColorGreen, 500)
+    greenFlash = setInterval(setColorGreen, 400)
     document.getElementById("startMessage").innerHTML =`<div id="startMessage" class="counter">Game Over! Click green to start <a href="https://www.youtube.com/watch?v=1Yqj76Q4jJ4" target="_blank" style="color: rgb(250, 127, 152);">Instructions</a></div>`
     if (beepSound) beepError.play()
     score = 0
@@ -64,8 +65,6 @@ else {
     speakerOn.style.backgroundColor = ""
     speakerOff.style.backgroundColor = "orange"
 }
-
-
 
 function soundOn() {
     beepSound = true
@@ -88,6 +87,7 @@ function getGreen() {
     if (greenStatus) {
         stopFlash()
         startGame()
+        darkGreen()
     }
     else {
     clickEventHandler("green")
@@ -112,14 +112,16 @@ function getBlue() {
 
 // Stores user input clicks on the array 'inputColorsArray' and compares this array with 'randomColorsArray'
 function clickEventHandler(color, beepColor) {
-    inputColorsArray.push(color)
-    if (checkBothArrays(randomColorsArray, inputColorsArray) == false) gameOver()
-    else if (checkBothArrays(randomColorsArray, inputColorsArray) && inputColorsArray.length==randomColorsArray.length){
-        continueGame()
-        setTimeout(function() {flashRandomColorsArray(randomColorsArray, 0)}, 1000)
-        // flashRandomColorsArray(randomColorsArray, 0)
-        inputColorsArray = []
-        scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
+    if (!greenStatus){
+        inputColorsArray.push(color)
+        if (checkBothArrays(randomColorsArray, inputColorsArray) == false) gameOver()
+        else if (checkBothArrays(randomColorsArray, inputColorsArray) && inputColorsArray.length==randomColorsArray.length){
+            continueGame()
+            setTimeout(function() {flashRandomColorsArray(randomColorsArray, 0, flashTimeSpeed)}, 1000)
+            // flashRandomColorsArray(randomColorsArray, 0)
+            inputColorsArray = []
+            scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
+        }
     }
 }
 
@@ -150,29 +152,57 @@ function continueGame() {
             color = 'blue';
             break;
     }
-
     randomColorsArray.push(color)
     score += 10
+    calculateNewSpeeds()
+}
+
+function calculateNewSpeeds() {
+    if (randomColorsArray.length <= 3) {
+        flashTimeSpeed = 800
+        flashColorOnceSpeed = 500
+    }
+    else if (randomColorsArray.length <= 5) {
+        flashTimeSpeed = 600
+        flashColorOnceSpeed = 300
+    }
+    else if (randomColorsArray.length <= 7) {
+        flashTimeSpeed = 500
+        flashColorOnceSpeed = 250
+    }
+    else if (randomColorsArray.length <= 9) {
+        flashTimeSpeed = 400
+        flashColorOnceSpeed = 200
+    }
+    else if (randomColorsArray.length <= 11){
+        flashTimeSpeed = 330
+        flashColorOnceSpeed = 140
+    }
+    else {
+        flashTimeSpeed = 260
+        flashColorOnceSpeed = 80
+    }
 }
 
  // This function cycles thru randomColorsArray and flashes each color stored in this array. This function is called by clickEventHandler()
- function flashRandomColorsArray(array, i) {
-    timedFlashes(array, i)
+ function flashRandomColorsArray(array, i, speed) {
+    timedFlashes(array, i, speed)
 }
 
 
 // This is a helper function for the function flashRandomColorsArray above
-function timedFlashes(array, i) {
+function timedFlashes(array, i, speed) {
     setTimeout(function() {
+        if (greenStatus) return
         if (array[i] == 'green') {flashGreenOnce() }
         else if (array[i] == 'red') {flashRedOnce() }
         else if (array[i] == 'yellow') {flashYellowOnce() }
         else if (array[i] == 'blue') {flashBlueOnce() }
         i++
         if (i<array.length) {
-            timedFlashes(array, i)
+            timedFlashes(array, i, speed)
         }
-    }, 800)
+    }, speed) //800
 }
 
 
@@ -236,7 +266,7 @@ function flashColorOnce(lightColorFunction, darkColorFunction, beepColor) {
         }, 0) //500
     setTimeout(function(){
         darkColorFunction()
-    },500) //1000
+    },flashColorOnceSpeed) //500
 }
 
 
@@ -254,4 +284,4 @@ function stopFlash(){
     greenButton.style.backgroundColor = "rgb(4, 170, 109)"
 }
 
-var greenFlash = setInterval(setColorGreen, 500)
+var greenFlash = setInterval(setColorGreen, 400)
