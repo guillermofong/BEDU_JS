@@ -10,7 +10,6 @@ var greenStatus = true // true when waiting for player to start
 var randomColorsArray = [] // stores random generated colors
 var inputColorsArray = [] // stores colors clicked by user
 var speakerOn = document.getElementById("speaker-on")
-// var speakerOff = document.getElementById("speaker-off")
 var beepGreen = document.getElementById("beepGreen");
 var beepRed = document.getElementById("beepRed");
 var beepYellow = document.getElementById("beepYellow");
@@ -49,7 +48,7 @@ function gameOver() {
     lightRed()
     lightYellow()
     lightBlue()
-    greenFlash = setInterval(setColorGreen, 400)
+    greenFlash = setInterval(setColorGreen, 200)
     document.getElementById("startMessage").innerHTML =`<div id="startMessage" class="counter">Game Over! Click green to start <a href="https://www.youtube.com/watch?v=1Yqj76Q4jJ4" target="_blank" style="color: rgb(250, 127, 152);">Instructions</a></div>`
     if (beepSound) beepError.play()
     score = 0
@@ -73,15 +72,6 @@ function soundOn() {
     }
     return beepSound
 }
-
-// function soundOff() {
-//     beepSound = false
-//     speakerOn.style.backgroundColor = ""
-//     speakerOff.style.backgroundColor = "orange"
-//     return beepSound
-// }
-
-
 
 // functions for onclick events
 function getGreen() {
@@ -119,7 +109,6 @@ function clickEventHandler(color, beepColor) {
         else if (checkBothArrays(randomColorsArray, inputColorsArray) && inputColorsArray.length==randomColorsArray.length){
             continueGame()
             setTimeout(function() {flashRandomColorsArray(randomColorsArray, 0, flashTimeSpeed)}, 1000)
-            // flashRandomColorsArray(randomColorsArray, 0)
             inputColorsArray = []
             scoreMessage.innerHTML = `<div id="score">Score: ${score}  </div>`
         }
@@ -285,6 +274,6 @@ function stopFlash(){
     greenButton.style.backgroundColor = "rgb(4, 170, 109)"
 }
 
-var greenFlash = setInterval(setColorGreen, 400)
+var greenFlash = setInterval(setColorGreen, 200)
 
 
