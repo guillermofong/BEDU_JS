@@ -10,7 +10,7 @@ var greenStatus = true // true when waiting for player to start
 var randomColorsArray = [] // stores random generated colors
 var inputColorsArray = [] // stores colors clicked by user
 var speakerOn = document.getElementById("speaker-on")
-var speakerOff = document.getElementById("speaker-off")
+// var speakerOff = document.getElementById("speaker-off")
 var beepGreen = document.getElementById("beepGreen");
 var beepRed = document.getElementById("beepRed");
 var beepYellow = document.getElementById("beepYellow");
@@ -57,28 +57,29 @@ function gameOver() {
 
 
 //Sound controls
-if (beepSound) {
-    speakerOn.style.backgroundColor = "orange"
-    speakerOff.style.backgroundColor = ""
-}
-else {
-    speakerOn.style.backgroundColor = ""
-    speakerOff.style.backgroundColor = "orange"
-}
+if (beepSound) speakerOn.style.backgroundColor = "orange"
+else speakerOn.style.backgroundColor = ""
 
 function soundOn() {
-    beepSound = true
-    speakerOn.style.backgroundColor = "orange"
-    speakerOff.style.backgroundColor = ""
+    if (beepSound) {
+        beepSound = false
+        speakerOn.style.backgroundColor = ""
+        speakerOn.src = "Images/speaker_off.svg"
+    }
+    else {
+        beepSound = true
+        speakerOn.style.backgroundColor = "orange"
+        speakerOn.src = "Images/speaker_on.svg"
+    }
     return beepSound
 }
 
-function soundOff() {
-    beepSound = false
-    speakerOn.style.backgroundColor = ""
-    speakerOff.style.backgroundColor = "orange"
-    return beepSound
-}
+// function soundOff() {
+//     beepSound = false
+//     speakerOn.style.backgroundColor = ""
+//     speakerOff.style.backgroundColor = "orange"
+//     return beepSound
+// }
 
 
 
@@ -90,8 +91,8 @@ function getGreen() {
         darkGreen()
     }
     else {
-    clickEventHandler("green")
-    flashGreenOnce()
+        clickEventHandler("green")
+        flashGreenOnce()
     }
 }
 
@@ -285,3 +286,5 @@ function stopFlash(){
 }
 
 var greenFlash = setInterval(setColorGreen, 400)
+
+

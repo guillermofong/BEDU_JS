@@ -23,7 +23,7 @@ body {
     content: '';
     position: absolute;
     background-color: rgb(68, 68, 68);
-    z-index: 11;
+    z-index: 9;
     width: 200px;
     height: 200px;
     top: 50%;
@@ -51,6 +51,7 @@ body {
     height: 250px;
     width: 250px;
     border-radius: 100% 0 0 0;
+    z-index: 1;
 }
 
 #green:active {
@@ -64,6 +65,7 @@ body {
     height: 250px;
     width: 250px;
     border-radius: 0 100%  0 0;
+    z-index: 1;
 }
 
 #red:active {
@@ -77,6 +79,7 @@ body {
     height: 250px;
     width: 250px;
     border-radius: 0 0 0 100%;
+    z-index: 1;
 }
 
 #yellow:active {
@@ -90,6 +93,7 @@ body {
     height: 250px;
     width: 250px;
     border-radius: 0  0 100% 0;
+    z-index: 1;
 }
 
 #blue:active {
@@ -105,8 +109,14 @@ body {
 }
 
 #speaker-on {
+    width: 100px;
+    height: 100px;
+    position: relative;
     background-color: none;
     border-radius: 50%;
+    left: 41%;
+    top: 40%;
+    z-index: 10;
 }
 
 #speaker-on:active {

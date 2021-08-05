@@ -12,11 +12,14 @@
     <header>
         <div id="startMessage" class="counter">Click on green to start <a href="https://www.youtube.com/watch?v=1Yqj76Q4jJ4" target="_blank" style="color: rgb(72, 235, 77);">Instructions</a></div>
     </header>
-    <div style="position:fixed;">
+    <!-- <div style="position:fixed;">
         <img src="Images/speaker_on.svg" style="width: 7%;" id="speaker-on" onclick="soundOn()">
         <img src="Images/speaker_off.svg" style="width: 7%;" id="speaker-off" onclick="soundOff()">
-    </div>
+    </div> -->
     <div id="center" class="container">
+        <div style="position: absolute; height: 100%; width: 100%">
+            <img src="Images/speaker_on.svg" id="speaker-on" onclick="soundOn()">
+        </div>
     
         <div class="top" >
             <div id="green" onclick="getGreen()" ></div>
